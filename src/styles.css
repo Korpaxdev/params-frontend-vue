@@ -1,0 +1,28 @@
+.fixed-center {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.absolute-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.form {
+    max-width: 800px;
+}
+
+.v-enter-active,
+.v-leave-active {
+    transition: opacity 0.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+    opacity: 0;
+}
