@@ -1,4 +1,4 @@
-export interface ParamFormData {
+export interface ParamAddFormData {
   cat_id: string;
   data_length: string;
   length: string;
@@ -9,7 +9,7 @@ export interface ParamFormData {
   spn: string;
 }
 
-export interface Param extends ParamFormData {
+export interface Param extends ParamAddFormData {
   id: number | null;
   date: string | null;
   status_delete: boolean;

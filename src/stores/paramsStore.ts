@@ -5,7 +5,7 @@ import apiUtils from "../utils/apiUtils.ts";
 import usePaginator from "./hooks/usePaginator.ts";
 
 const useParamsStore = defineStore("params", () => {
-  const params = ref<Param[] | null>(null);
+  const params = ref<Param[]>([]);
   const isLoading = ref(false);
   const isError = ref(false);
   const searchFields = reactive<SearchParamFields>({
@@ -14,8 +14,8 @@ const useParamsStore = defineStore("params", () => {
     scaling: "",
   });
   const { paginatedParams, totalPages, currentPage } = usePaginator(params, searchFields);
-  const currenPageParams = computed<Param[] | null>(() => {
-    if (!paginatedParams.value) return null;
+  const currenPageParams = computed<Param[]>(() => {
+    if (!paginatedParams.value || !paginatedParams.value?.length) return [];
     return paginatedParams.value[currentPage.value - 1];
   });
 

@@ -1,4 +1,4 @@
-import { onBeforeMount, watch } from "vue";
+import { onMounted, watch } from "vue";
 import { hasTokenInStorage } from "../utils/tokenUtils.ts";
 import useUserStore from "../stores/userStore.ts";
 import { storeToRefs } from "pinia";
@@ -11,7 +11,7 @@ const useAuth = () => {
     if (hasToken.value) await fetchProfile();
   });
 
-  onBeforeMount(async () => {
+  onMounted(async () => {
     hasToken.value = hasTokenInStorage();
   });
 };

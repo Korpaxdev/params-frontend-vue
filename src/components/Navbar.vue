@@ -18,6 +18,11 @@
           <li class="nav-item">
             <router-link to="/" active-class="active" class="nav-link">Главная</router-link>
           </li>
+          <li v-if="hasParamsToModify" class="nav-item">
+            <router-link to="/to-server" active-class="active" class="nav-link"
+              >На модификации ({{ countParamsToModify }})
+            </router-link>
+          </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item" v-if="!isAuthenticated">
@@ -39,8 +44,11 @@
 <script lang="ts" setup>
 import useUserStore from "../stores/userStore.ts";
 import { storeToRefs } from "pinia";
+import useParamsToServerStore from "../stores/paramsToServerStore.ts";
 
 const userStore = useUserStore();
+const paramsToServerStore = useParamsToServerStore();
 const { logout } = userStore;
 const { isAuthenticated, profile } = storeToRefs(userStore);
+const { hasParamsToModify, countParamsToModify } = storeToRefs(paramsToServerStore);
 </script>
