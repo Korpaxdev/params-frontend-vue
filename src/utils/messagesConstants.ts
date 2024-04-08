@@ -5,3 +5,4 @@ export const PASSWORD_ERROR =
   "Пароль должен содержать не менее 8 символов, а так же минимум 1 цифру, 1 заглавную букву и 1 нижнюю букву";
 export const PASSWORD_CONFIRM_ERROR = "Пароли не совпадают";
 export const REGISTER_SUCCESS = "Вы успешно зарегистрировались";
+export const PASSWORD_CHANGE_SUCCESS = "Пароль успешно изменен";

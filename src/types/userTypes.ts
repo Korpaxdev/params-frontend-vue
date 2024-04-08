@@ -12,6 +12,11 @@ export interface RegisterForm extends ProfileFormData {
   passwordConfirm: string;
 }
 
+export interface ChangePasswordForm {
+  old_password: string;
+  new_password: string;
+}
+
 export interface LoginData {
   username: string;
   password: string;

@@ -1,5 +1,5 @@
 <template>
-  <div class="text-center" :class="config.activeClass[type]">
+  <div class="text-center my-3" :class="config.activeClass[type]">
     <h2>{{ config.header[type] }}</h2>
     <p v-if="typeof message === 'string'">{{ message }}</p>
     <ul v-else class="list-group">

@@ -2,7 +2,7 @@
   <form class="form mx-auto mt-3 position-relative" @submit="onSubmit" @reset="form.resetForm">
     <spinner class="absolute-center" v-if="profileIsLoading" />
     <transition>
-      <alert v-if="profileUpdateError" :message="profileUpdateError" type="error" class="mb-3" />
+      <alert v-if="profileUpdateError" :message="profileUpdateError" type="error" />
     </transition>
     <div class="mb-3">
       <label for="username" class="form-label">Имя пользователя</label>

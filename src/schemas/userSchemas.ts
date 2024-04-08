@@ -20,14 +20,14 @@ export const registerSchema = object({
   username: string().required(REQUIRED_FIELD_ERROR),
   email: string().required(REQUIRED_FIELD_ERROR).email(EMAIL_FIELD_ERROR),
   password: string().required(REQUIRED_FIELD_ERROR).matches(PASSWORD_REG_EXP, { message: PASSWORD_ERROR }),
-  passwordConfirm: string()
+  password_confirm: string()
     .required(REQUIRED_FIELD_ERROR)
     .oneOf([ref("password")], PASSWORD_CONFIRM_ERROR),
 });
 export const passwordChangeSchema = object({
-  oldPassword: string().required(REQUIRED_FIELD_ERROR).matches(PASSWORD_REG_EXP, { message: PASSWORD_ERROR }),
-  newPassword: string().required(REQUIRED_FIELD_ERROR).matches(PASSWORD_REG_EXP, { message: PASSWORD_ERROR }),
-  passwordConfirm: string()
+  old_password: string().required(REQUIRED_FIELD_ERROR),
+  new_password: string().required(REQUIRED_FIELD_ERROR).matches(PASSWORD_REG_EXP, { message: PASSWORD_ERROR }),
+  password_confirm: string()
     .required(REQUIRED_FIELD_ERROR)
-    .oneOf([ref("newPassword")], PASSWORD_CONFIRM_ERROR),
+    .oneOf([ref("new_password")], PASSWORD_CONFIRM_ERROR),
 });

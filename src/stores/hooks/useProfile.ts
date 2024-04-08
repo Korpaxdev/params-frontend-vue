@@ -1,17 +1,23 @@
 import { ref } from "vue";
-import { Profile, ProfileFormData } from "../../types/userTypes.ts";
+import { ChangePasswordForm, Profile, ProfileFormData } from "../../types/userTypes.ts";
 import apiUtils from "../../utils/apiUtils.ts";
 import { getAccessToken } from "../../utils/tokenUtils.ts";
 import { AxiosError, AxiosHeaders } from "axios";
 import useToken from "./useToken.ts";
-import { DEFAULT_ERROR_MESSAGE } from "../../utils/messagesConstants.ts";
+import { DEFAULT_ERROR_MESSAGE, PASSWORD_CHANGE_SUCCESS } from "../../utils/messagesConstants.ts";
+import { ErrorMessage } from "../../types/otherTypes.ts";
 
 const useProfile = () => {
   const tokenStore = useToken();
   const { updateAccessToken } = tokenStore;
+
   const profile = ref<Profile | null>(null);
   const profileIsLoading = ref(false);
-  const profileUpdateError = ref("");
+  const profileUpdateError = ref<ErrorMessage>("");
+
+  const passwordUpdateIsLoading = ref(false);
+  const passwordUpdateError = ref<ErrorMessage>("");
+  const passwordUpdateSuccess = ref("");
   const fetchProfile = async () => {
     try {
       profileIsLoading.value = true;
@@ -51,6 +57,39 @@ const useProfile = () => {
       profileIsLoading.value = false;
     }
   };
-  return { profile, profileUpdateError, profileIsLoading, fetchProfile, updateProfile };
+  const changePassword = async (data: ChangePasswordForm) => {
+    passwordUpdateSuccess.value = "";
+    passwordUpdateError.value = "";
+    try {
+      passwordUpdateIsLoading.value = true;
+      const headers = new AxiosHeaders();
+      const accessToken = getAccessToken();
+      headers.set("Authorization", `Bearer ${accessToken}`);
+      await apiUtils.post("users/password/change/", data, { headers });
+      passwordUpdateIsLoading.value = false;
+      passwordUpdateSuccess.value = PASSWORD_CHANGE_SUCCESS;
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        if (e.response?.status === 401) {
+          await updateAccessToken();
+          await changePassword(data);
+        } else {
+          passwordUpdateError.value = e.response?.data ?? DEFAULT_ERROR_MESSAGE;
+        }
+        passwordUpdateIsLoading.value = false;
+      }
+    }
+  };
+  return {
+    profile,
+    profileUpdateError,
+    profileIsLoading,
+    passwordUpdateIsLoading,
+    passwordUpdateError,
+    passwordUpdateSuccess,
+    fetchProfile,
+    updateProfile,
+    changePassword,
+  };
 };
 export default useProfile;

@@ -2,8 +2,8 @@
   <Form :validation-schema="registerSchema" :on-submit="onSubmit" class="form mx-auto position-relative">
     <spinner class="absolute-center" v-if="isRegisterLoading" />
     <transition-group>
-      <alert :message="registerError" type="error" v-if="registerError" class="my-3" />
-      <alert :message="registerSuccess" type="success" v-if="registerSuccess" class="my-3" />
+      <alert :message="registerError" type="error" v-if="registerError" />
+      <alert :message="registerSuccess" type="success" v-if="registerSuccess" />
     </transition-group>
     <div class="mb-3">
       <Field v-slot="{ field, errors }" name="username">
@@ -33,16 +33,16 @@
       </Field>
     </div>
     <div class="mb-3">
-      <Field v-slot="{ field, errors }" name="passwordConfirm">
-        <label for="passwordConfirm" class="form-label">Подтвердите пароль</label>
+      <Field v-slot="{ field, errors }" name="password_confirm">
+        <label for="password_confirm" class="form-label">Подтвердите пароль</label>
         <input
           v-bind="field"
-          id="passwordConfirm"
+          id="password_confirm"
           class="form-control"
           :class="{ 'is-invalid': errors.length }"
           type="password"
         />
-        <ErrorMessage name="passwordConfirm" class="invalid-feedback" />
+        <ErrorMessage name="password_confirm" class="invalid-feedback" />
       </Field>
     </div>
     <button class="btn btn-primary">Отправить</button>
