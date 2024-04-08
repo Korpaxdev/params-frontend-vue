@@ -1,7 +1,7 @@
 <template>
   <spinner class="fixed-center" v-if="isLoading" />
-  <search-params v-if="currenPageParams.length" />
-  <parameters-controls />
+  <search-params />
+  <parameters-controls v-if="isAuthenticated" />
   <template v-if="currenPageParams.length">
     <div class="table-responsive mt-5" v-if="currenPageParams.length">
       <table class="table">
@@ -20,7 +20,7 @@
     <paginator :total-pages="totalPages" :current-page="currentPage" :change-page="changePage" />
   </template>
   <h2 v-else class="text-center text-secondary">Список параметров пуст</h2>
-  <parameters-controls v-if="currenPageParams!.length > 10" class="mb-5" />
+  <parameters-controls v-if="currenPageParams!.length > 10 && isAuthenticated" class="mb-5" />
   <add-parameter-modal />
 </template>
 

@@ -43,6 +43,7 @@ import { LoginData } from "../types/userTypes.ts";
 import useUserStore from "../stores/userStore.ts";
 import { storeToRefs } from "pinia";
 import ErrorAlert from "./Alert.vue";
+import { onBeforeUnmount } from "vue";
 
 const userStore = useUserStore();
 const { fetchTokens } = userStore;
@@ -53,4 +54,7 @@ const onSubmit = async (data: LoginData, actions: FormActions<LoginData>) => {
     actions.resetForm();
   }
 };
+onBeforeUnmount(() => {
+  tokenError.value = "";
+});
 </script>
