@@ -10,11 +10,11 @@
               class="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-              ref="{closeButton}"
+              ref="closeButton"
             ></button>
           </div>
           <div class="modal-body">
-            <AddParameterForm />
+            <AddParameterForm :close-modal-func="closeModal" />
           </div>
         </div>
       </div>
@@ -23,4 +23,12 @@
 </template>
 <script setup lang="ts">
 import AddParameterForm from "./AddParameterForm.vue";
+import { ref } from "vue";
+
+const closeButton = ref<HTMLButtonElement | null>(null);
+const closeModal = () => {
+  if (closeButton.value) {
+    closeButton.value.click();
+  }
+};
 </script>

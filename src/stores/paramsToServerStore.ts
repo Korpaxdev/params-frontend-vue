@@ -8,7 +8,7 @@ const useParamsToServerStore = defineStore("paramsToServerStore", () => {
   const addNewParamsControls = useAddNewParams();
   const { paramsMarkToDelete, markParamsSyncIsLoading, markParamsSyncError, syncMarkedParams } =
     markToDeleteParamsControls;
-  const { addedParams } = addNewParamsControls;
+  const { addedParams, syncAddedParams } = addNewParamsControls;
   const isSyncLoading = computed(() => markParamsSyncIsLoading.value);
   const countParamsToModify = computed(() => paramsMarkToDelete.value.length + addedParams.value.length);
   const hasParamsToModify = computed(() => !!countParamsToModify.value);
@@ -20,6 +20,7 @@ const useParamsToServerStore = defineStore("paramsToServerStore", () => {
   };
   const syncParams = async () => {
     await syncMarkedParams();
+    await syncAddedParams();
   };
 
   return {

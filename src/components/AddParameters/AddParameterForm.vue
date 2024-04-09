@@ -15,12 +15,25 @@ import { ErrorMessage, Field, Form, FormActions } from "vee-validate";
 import { paramAddSchema } from "../../schemas/paramSchemas.ts";
 import { ParamAddFormData } from "../../types/paramsTypes.ts";
 import useParamsToServerStore from "../../stores/paramsToServerStore.ts";
+import useParamsStore from "../../stores/paramsStore.ts";
+import { storeToRefs } from "pinia";
+import { DEFAULT_PAGE } from "../../utils/defaultConstants.ts";
 
+interface Props {
+  closeModalFunc: () => void;
+}
+
+const props = defineProps<Props>();
+
+const paramsStore = useParamsStore();
+const { totalPages, currentPage } = storeToRefs(paramsStore);
 const paramsToServerStore = useParamsToServerStore();
 const { addNewParam } = paramsToServerStore;
 
 const onSubmit = (data: ParamAddFormData, actions: FormActions<ParamAddFormData>) => {
   addNewParam(data);
   actions.resetForm();
+  props.closeModalFunc();
+  currentPage.value = totalPages.value ?? DEFAULT_PAGE;
 };
 </script>

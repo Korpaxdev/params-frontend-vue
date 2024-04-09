@@ -18,7 +18,7 @@
           <li class="nav-item">
             <router-link to="/" active-class="active" class="nav-link">Главная</router-link>
           </li>
-          <li v-if="hasParamsToModify" class="nav-item">
+          <li v-if="hasParamsToModify && isAuthenticated" class="nav-item">
             <router-link to="/to-server" active-class="active" class="nav-link"
               >На модификации ({{ countParamsToModify }})
             </router-link>

@@ -1,7 +1,13 @@
 import { ref } from "vue";
 import { AccessToken, LoginData, Token } from "../../types/userTypes.ts";
 import apiUtils from "../../utils/apiUtils.ts";
-import { clearTokensInStorage, getRefreshToken, setAccessToken, setRefreshToken } from "../../utils/tokenUtils.ts";
+import {
+  clearTokensInStorage,
+  getRefreshToken,
+  hasTokenInStorage,
+  setAccessToken,
+  setRefreshToken,
+} from "../../utils/tokenUtils.ts";
 import { AxiosError } from "axios";
 import { DEFAULT_ERROR_MESSAGE } from "../../utils/messagesConstants.ts";
 
@@ -32,6 +38,9 @@ const useToken = () => {
     hasToken.value = false;
   };
   const updateAccessToken = async () => {
+    if (!hasTokenInStorage()) {
+      clearTokens();
+    }
     try {
       const refreshToken = getRefreshToken();
       const res = await apiUtils.post<AccessToken>("users/token/refresh/", { refresh: refreshToken });
@@ -39,7 +48,6 @@ const useToken = () => {
       hasToken.value = true;
     } catch {
       clearTokens();
-      hasToken.value = false;
     }
   };
   return { hasToken, tokenIsLoading, tokenError, fetchTokens, clearTokens, updateAccessToken };

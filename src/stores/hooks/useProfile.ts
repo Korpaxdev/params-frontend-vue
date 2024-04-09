@@ -1,16 +1,12 @@
-import { ref } from "vue";
+import { Ref, ref } from "vue";
 import { ChangePasswordForm, Profile, ProfileFormData } from "../../types/userTypes.ts";
 import apiUtils from "../../utils/apiUtils.ts";
 import { getAccessToken } from "../../utils/tokenUtils.ts";
 import { AxiosError, AxiosHeaders } from "axios";
-import useToken from "./useToken.ts";
 import { DEFAULT_ERROR_MESSAGE, PASSWORD_CHANGE_SUCCESS } from "../../utils/messagesConstants.ts";
 import { ErrorMessage } from "../../types/otherTypes.ts";
 
-const useProfile = () => {
-  const tokenStore = useToken();
-  const { updateAccessToken } = tokenStore;
-
+const useProfile = (hasToken: Ref<boolean>, updateAccessToken: () => Promise<void>) => {
   const profile = ref<Profile | null>(null);
   const profileIsLoading = ref(false);
   const profileUpdateError = ref<ErrorMessage>("");
@@ -19,6 +15,7 @@ const useProfile = () => {
   const passwordUpdateError = ref<ErrorMessage>("");
   const passwordUpdateSuccess = ref("");
   const fetchProfile = async () => {
+    if (!hasToken.value) return;
     try {
       profileIsLoading.value = true;
       const accessToken = getAccessToken();

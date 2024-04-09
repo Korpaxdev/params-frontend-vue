@@ -7,11 +7,13 @@ import { AxiosError, AxiosHeaders } from "axios";
 import useUserStore from "../userStore.ts";
 import { ErrorMessage } from "../../types/otherTypes.ts";
 import { DEFAULT_ERROR_MESSAGE } from "../../utils/messagesConstants.ts";
+import { storeToRefs } from "pinia";
 
 const useMarkToDeleteParams = () => {
   const paramsMarkToDelete = ref<Param[]>([]);
   const userStore = useUserStore();
   const { updateAccessToken } = userStore;
+  const { hasToken } = storeToRefs(userStore);
   const {
     paginatedParams: paginatedMarkToDeleteParams,
     currentPage: markToDeleteCurrentPage,
@@ -30,14 +32,13 @@ const useMarkToDeleteParams = () => {
     paramsMarkToDelete.value = paramsMarkToDelete.value.filter((value) => value !== param);
   };
   const syncMarkedParams = async () => {
+    if (!hasToken.value) return;
     const accessToken = getAccessToken();
-    if (!accessToken) return;
     try {
       markParamsSyncIsLoading.value = true;
       const headers = new AxiosHeaders();
       headers.set("Authorization", `Bearer ${accessToken}`);
-      const res = await apiUtils.post("parameters/to-delete/", paramsMarkToDelete.value, { headers });
-      console.log(res.data);
+      await apiUtils.post("parameters/to-delete/", paramsMarkToDelete.value, { headers });
       paramsMarkToDelete.value = [];
     } catch (e) {
       if (e instanceof AxiosError) {
