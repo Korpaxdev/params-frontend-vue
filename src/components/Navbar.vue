@@ -14,7 +14,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center align-items-center">
           <li class="nav-item">
             <router-link to="/" active-class="active" class="nav-link">Главная</router-link>
           </li>
@@ -24,7 +24,7 @@
             </router-link>
           </li>
         </ul>
-        <ul class="navbar-nav">
+        <ul class="navbar-nav justify-content-center align-items-center">
           <li class="nav-item" v-if="!isAuthenticated">
             <router-link to="/login/" class="btn btn-outline-secondary">Войти</router-link>
           </li>

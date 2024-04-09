@@ -1,9 +1,9 @@
 <template>
-  <spinner class="fixed-center" v-if="isLoading" />
+  <spinner class="fixed-center" v-if="isLoading || markParamsSyncIsLoading" />
   <search-params />
   <parameters-controls v-if="isAuthenticated" />
   <template v-if="currenPageParams.length">
-    <div class="table-responsive mt-5" v-if="currenPageParams.length">
+    <div class="table-responsive mt-5">
       <table class="table">
         <table-head :headers="headers" />
         <tbody>
@@ -47,6 +47,7 @@ const paramsToServerStore = useParamsToServerStore();
 const { markParamToDelete } = paramsToServerStore;
 const { currenPageParams, currentPage, totalPages, isLoading } = storeToRefs(paramsStore);
 const { isAuthenticated } = storeToRefs(userStore);
+const { markParamsSyncIsLoading } = storeToRefs(paramsToServerStore);
 
 const headers = computed(() => {
   if (currenPageParams.value && currenPageParams.value.length) {
