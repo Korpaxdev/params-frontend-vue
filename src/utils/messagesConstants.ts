@@ -12,3 +12,5 @@ export const HAS_MODIFY_PARAMS_CONFIRM =
   "У вас есть параметры не синхронизированные с сервером. В случае обновления таблицы эти параметры пропадут";
 
 export const NOTHING_TO_SYNC = "Нечего синхронизировать";
+export const PASSWORD_RESET_SUCCESSFUL = "Пароль был успешно изменен";
+export const PASSWORD_RESET_TOKEN_IS_INVALID = "Токен был просрочен или является не валидным";

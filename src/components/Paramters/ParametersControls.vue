@@ -20,7 +20,7 @@ const paramsStore = useParamsStore();
 const paramsToServerStore = useParamsToServerStore();
 const { fetchParams } = paramsStore;
 const { clearModifyParams, syncParams } = paramsToServerStore;
-const { isLoading: paramsIsLoading } = storeToRefs(paramsStore);
+const { isLoading: paramsIsLoading, currentPage } = storeToRefs(paramsStore);
 const { markParamsSyncError, hasParamsToModify, countParamsToModify, markParamsSyncIsLoading } =
   storeToRefs(paramsToServerStore);
 

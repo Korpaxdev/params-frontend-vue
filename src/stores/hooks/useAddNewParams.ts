@@ -30,7 +30,7 @@ const useAddNewParams = () => {
     params.value.push(newParam);
   };
   const syncAddedParams = async () => {
-    if (!hasToken.value) return;
+    if (!hasToken.value || !addedParams.value.length) return;
     const accessToken = getAccessToken();
     try {
       const headers = new AxiosHeaders();

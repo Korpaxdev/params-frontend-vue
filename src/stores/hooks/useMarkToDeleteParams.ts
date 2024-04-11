@@ -32,7 +32,7 @@ const useMarkToDeleteParams = () => {
     paramsMarkToDelete.value = paramsMarkToDelete.value.filter((value) => value !== param);
   };
   const syncMarkedParams = async () => {
-    if (!hasToken.value) return;
+    if (!hasToken.value || !paramsMarkToDelete.value.length) return;
     const accessToken = getAccessToken();
     try {
       markParamsSyncIsLoading.value = true;

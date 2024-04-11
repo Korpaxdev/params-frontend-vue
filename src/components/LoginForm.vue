@@ -29,6 +29,7 @@
         />
       </Field>
       <ErrorMessage name="password" class="invalid-feedback" />
+      <router-link to="/password-reset" class="d-block mt-2 link-secondary">Забыли пароль?</router-link>
     </div>
     <div class="d-flex align-items-center gap-2">
       <button class="btn btn-primary" :disabled="tokenIsLoading">Войти</button>

@@ -29,3 +29,17 @@ export interface AccessToken {
 export interface Token extends AccessToken {
   refresh: string;
 }
+
+export interface PasswordResetSendEmailData {
+  email: string;
+}
+
+export interface PasswordResetSendEmailResponse {
+  email: string;
+  message: string;
+}
+
+export interface PasswordResetCompleteData {
+  new_password: string;
+  password_confirm: string;
+}

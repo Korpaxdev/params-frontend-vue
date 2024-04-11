@@ -2,4 +2,4 @@ interface ErrorObject {
   [key: string]: string[];
 }
 
-export type ErrorMessage = string | ErrorObject[] | ErrorObject;
+export type ErrorMessage = string | string[] | ErrorObject[] | ErrorObject;

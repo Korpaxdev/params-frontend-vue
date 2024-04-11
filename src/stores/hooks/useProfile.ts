@@ -1,9 +1,20 @@
 import { Ref, ref } from "vue";
-import { ChangePasswordForm, Profile, ProfileFormData } from "../../types/userTypes.ts";
+import {
+  ChangePasswordForm,
+  PasswordResetCompleteData,
+  PasswordResetSendEmailData,
+  PasswordResetSendEmailResponse,
+  Profile,
+  ProfileFormData,
+} from "../../types/userTypes.ts";
 import apiUtils from "../../utils/apiUtils.ts";
 import { getAccessToken } from "../../utils/tokenUtils.ts";
 import { AxiosError, AxiosHeaders } from "axios";
-import { DEFAULT_ERROR_MESSAGE, PASSWORD_CHANGE_SUCCESS } from "../../utils/messagesConstants.ts";
+import {
+  DEFAULT_ERROR_MESSAGE,
+  PASSWORD_CHANGE_SUCCESS,
+  PASSWORD_RESET_SUCCESSFUL,
+} from "../../utils/messagesConstants.ts";
 import { ErrorMessage } from "../../types/otherTypes.ts";
 
 const useProfile = (hasToken: Ref<boolean>, updateAccessToken: () => Promise<void>) => {
@@ -14,6 +25,14 @@ const useProfile = (hasToken: Ref<boolean>, updateAccessToken: () => Promise<voi
   const passwordUpdateIsLoading = ref(false);
   const passwordUpdateError = ref<ErrorMessage>("");
   const passwordUpdateSuccess = ref("");
+
+  const passwordResetIsLoading = ref(false);
+  const passwordResetError = ref<ErrorMessage>("");
+  const passwordResetSuccess = ref<string | string[]>("");
+  const passwordResetCompleteIsLoading = ref(false);
+  const passwordResetCompleteError = ref<ErrorMessage>("");
+  const passwordResetCompleteSuccess = ref("");
+
   const fetchProfile = async () => {
     if (!hasToken.value) return;
     try {
@@ -77,6 +96,41 @@ const useProfile = (hasToken: Ref<boolean>, updateAccessToken: () => Promise<voi
       }
     }
   };
+  const passwordResetSendEmail = async (data: PasswordResetSendEmailData) => {
+    const newData = { ...data, next: window.location.origin + "/password-reset/complete/" };
+    passwordResetSuccess.value = "";
+    passwordResetError.value = "";
+    try {
+      passwordResetIsLoading.value = true;
+      const res = await apiUtils.post<PasswordResetSendEmailResponse>("users/password/reset/", newData);
+      passwordResetSuccess.value = res.data.message.split("\n");
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        passwordResetError.value = e.response?.data ?? DEFAULT_ERROR_MESSAGE;
+      }
+    } finally {
+      passwordResetIsLoading.value = false;
+    }
+  };
+  const passwordResetComplete = async (data: PasswordResetCompleteData, token: string) => {
+    passwordResetCompleteError.value = "";
+    try {
+      passwordResetCompleteIsLoading.value = true;
+      const res = await apiUtils.post(`users/password/reset/complete/${token}/`, data);
+      console.log(res.data);
+      passwordResetCompleteSuccess.value = PASSWORD_RESET_SUCCESSFUL;
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        if (e.response?.status === 404) {
+          passwordResetCompleteError.value = PASSWORD_RESET_TOKEN_IS_INVALID;
+        } else {
+          passwordResetCompleteError.value = e.response?.data ?? DEFAULT_ERROR_MESSAGE;
+        }
+      }
+    } finally {
+      passwordResetCompleteIsLoading.value = false;
+    }
+  };
   return {
     profile,
     profileUpdateError,
@@ -84,9 +138,17 @@ const useProfile = (hasToken: Ref<boolean>, updateAccessToken: () => Promise<voi
     passwordUpdateIsLoading,
     passwordUpdateError,
     passwordUpdateSuccess,
+    passwordResetIsLoading,
+    passwordResetError,
+    passwordResetSuccess,
+    passwordResetCompleteIsLoading,
+    passwordResetCompleteError,
+    passwordResetCompleteSuccess,
     fetchProfile,
     updateProfile,
     changePassword,
+    passwordResetSendEmail,
+    passwordResetComplete,
   };
 };
 export default useProfile;

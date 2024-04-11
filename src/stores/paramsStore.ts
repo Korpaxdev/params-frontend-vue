@@ -3,6 +3,7 @@ import { computed, reactive, ref } from "vue";
 import { Param, SearchParamFields } from "../types/paramsTypes.ts";
 import apiUtils from "../utils/apiUtils.ts";
 import usePaginator from "./hooks/usePaginator.ts";
+import { DEFAULT_PAGE } from "../utils/defaultConstants.ts";
 
 const useParamsStore = defineStore("params", () => {
   const params = ref<Param[]>([]);
@@ -25,6 +26,7 @@ const useParamsStore = defineStore("params", () => {
       const res = await apiUtils.get<Param[]>("parameters/");
       params.value = res.data;
       isLoading.value = false;
+      currentPage.value = DEFAULT_PAGE;
     } catch (e) {
       isLoading.value = false;
       isError.value = true;

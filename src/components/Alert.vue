@@ -1,9 +1,9 @@
 <template>
-  <div class="text-center my-3" :class="config.activeClass[type]">
+  <div class="text-center my-3" :class="activeClass">
     <h2>{{ config.header[type] }}</h2>
     <p v-if="typeof message === 'string'">{{ message }}</p>
     <ul v-else class="list-group">
-      <li v-for="value in messageArray" class="list-group-item list-group-item-danger">
+      <li v-for="value in messageArray" class="list-group-item" :class="activeClass">
         {{ value }}
       </li>
     </ul>
@@ -31,15 +31,24 @@ const config = {
     error: "Упс, произошла ошибка!",
     success: "Успешно!",
   },
+  listGroupClass: {
+    error: "list-group-item-danger-danger",
+    success: "list-group-item-success",
+  },
 };
+const activeClass = computed<string>(() => config.activeClass[props.type]);
 const messageArray = computed<string[]>(() => {
   const array: string[] = [];
   if (typeof props.message === "string") {
     array.push(props.message);
   } else if (Array.isArray(props.message)) {
-    for (const obj of props.message) {
-      for (const values of Object.values(obj)) {
-        array.push(...values);
+    for (const val of props.message) {
+      if (typeof val === "object") {
+        for (const values of Object.values(val)) {
+          array.push(...values);
+        }
+      } else {
+        array.push(val);
       }
     }
   } else {
@@ -50,3 +59,8 @@ const messageArray = computed<string[]>(() => {
   return array;
 });
 </script>
+<style>
+.text-inherit {
+  color: inherit;
+}
+</style>
