@@ -7,7 +7,8 @@ import PasswordChangePage from "../pages/PasswordChangePage.vue";
 import ParamsToServerPage from "../pages/ParamsToServerPage.vue";
 import PasswordResetEmailSendPage from "../pages/PasswordResetEmailSendPage.vue";
 import PasswordResetCompletePage from "../pages/PasswordResetCompletePage.vue";
-import { UUID_REGEXP } from "../utils/otherUtils.ts";
+import { JWT_REGEXP, UUID_REGEXP } from "../utils/otherUtils.ts";
+import OauthPage from "../pages/OauthPage.vue";
 
 const routes: ReadonlyArray<RouteRecordRaw> = [
   { path: "/", component: IndexPage, name: "IndexPage" },
@@ -22,5 +23,13 @@ const routes: ReadonlyArray<RouteRecordRaw> = [
   },
   { path: "/register", component: RegisterPage, name: "RegisterPage" },
   { path: "/to-server", component: ParamsToServerPage, name: "ParamsToServerPage" },
+  {
+    path: "/oauth",
+    component: OauthPage,
+    name: "OauthPage",
+    beforeEnter(to) {
+      return JWT_REGEXP.test(to.query.access as string) && JWT_REGEXP.test(to.query.refresh as string);
+    },
+  },
 ];
 export default routes;

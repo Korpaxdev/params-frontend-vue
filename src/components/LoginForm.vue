@@ -36,6 +36,7 @@
       <router-link to="/register/" class="btn btn-link">Зарегистрироваться</router-link>
     </div>
   </Form>
+  <login-with />
 </template>
 <script setup lang="ts">
 import { loginUserSchema } from "../schemas/userSchemas.js";
@@ -45,6 +46,7 @@ import useUserStore from "../stores/userStore.ts";
 import { storeToRefs } from "pinia";
 import ErrorAlert from "./Alert.vue";
 import { onBeforeUnmount } from "vue";
+import LoginWith from "./LoginWith.vue";
 
 const userStore = useUserStore();
 const { fetchTokens } = userStore;

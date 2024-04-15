@@ -43,3 +43,5 @@ export interface PasswordResetCompleteData {
   new_password: string;
   password_confirm: string;
 }
+
+export type OauthProviders = "google";
