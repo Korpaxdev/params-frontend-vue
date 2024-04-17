@@ -35,15 +35,16 @@
   </Form>
 </template>
 <script setup lang="ts">
-import { ErrorMessage, Field, Form, FormActions } from "vee-validate";
-import { passwordResetCompleteSchema } from "../../schemas/userSchemas.ts";
-import router from "../../routes/router.ts";
-import useUserStore from "../../stores/userStore.ts";
-import { PasswordResetCompleteData } from "../../types/userTypes.ts";
-import { computed, onBeforeUnmount } from "vue";
-import Alert from "../Alert.vue";
-import { storeToRefs } from "pinia";
-import Spinner from "../Spinner.vue";
+import { storeToRefs } from 'pinia';
+import { ErrorMessage, Field, Form, FormActions } from 'vee-validate';
+import { computed, onBeforeUnmount } from 'vue';
+
+import router from '../../routes/router.ts';
+import { passwordResetCompleteSchema } from '../../schemas/userSchemas.ts';
+import useUserStore from '../../stores/userStore.ts';
+import { PasswordResetCompleteData } from '../../types/userTypes.ts';
+import Alert from '../Alert.vue';
+import Spinner from '../Spinner.vue';
 
 const token = computed<string>(() => router.currentRoute.value.params.token as string);
 const userStore = useUserStore();
@@ -60,7 +61,7 @@ const onSubmit = async (data: PasswordResetCompleteData, actions: FormActions<Pa
   }
 };
 onBeforeUnmount(() => {
-  passwordResetCompleteSuccess.value = "";
-  passwordResetCompleteError.value = "";
+  passwordResetCompleteSuccess.value = '';
+  passwordResetCompleteError.value = '';
 });
 </script>

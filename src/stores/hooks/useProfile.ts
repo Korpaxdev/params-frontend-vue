@@ -1,4 +1,7 @@
-import { Ref, ref } from "vue";
+import { AxiosError, AxiosHeaders } from 'axios';
+import { Ref, ref } from 'vue';
+
+import { ErrorMessage } from '../../types/otherTypes.ts';
 import {
   ChangePasswordForm,
   PasswordResetCompleteData,
@@ -6,32 +9,30 @@ import {
   PasswordResetSendEmailResponse,
   Profile,
   ProfileFormData,
-} from "../../types/userTypes.ts";
-import apiUtils from "../../utils/apiUtils.ts";
-import { getAccessToken } from "../../utils/tokenUtils.ts";
-import { AxiosError, AxiosHeaders } from "axios";
+} from '../../types/userTypes.ts';
+import apiUtils from '../../utils/apiUtils.ts';
 import {
   DEFAULT_ERROR_MESSAGE,
   PASSWORD_CHANGE_SUCCESS,
   PASSWORD_RESET_SUCCESSFUL,
-} from "../../utils/messagesConstants.ts";
-import { ErrorMessage } from "../../types/otherTypes.ts";
+} from '../../utils/messagesConstants.ts';
+import { getAccessToken } from '../../utils/tokenUtils.ts';
 
 const useProfile = (hasToken: Ref<boolean>, updateAccessToken: () => Promise<void>) => {
   const profile = ref<Profile | null>(null);
   const profileIsLoading = ref(false);
-  const profileUpdateError = ref<ErrorMessage>("");
+  const profileUpdateError = ref<ErrorMessage>('');
 
   const passwordUpdateIsLoading = ref(false);
-  const passwordUpdateError = ref<ErrorMessage>("");
-  const passwordUpdateSuccess = ref("");
+  const passwordUpdateError = ref<ErrorMessage>('');
+  const passwordUpdateSuccess = ref('');
 
   const passwordResetIsLoading = ref(false);
-  const passwordResetError = ref<ErrorMessage>("");
-  const passwordResetSuccess = ref<string | string[]>("");
+  const passwordResetError = ref<ErrorMessage>('');
+  const passwordResetSuccess = ref<string | string[]>('');
   const passwordResetCompleteIsLoading = ref(false);
-  const passwordResetCompleteError = ref<ErrorMessage>("");
-  const passwordResetCompleteSuccess = ref("");
+  const passwordResetCompleteError = ref<ErrorMessage>('');
+  const passwordResetCompleteSuccess = ref('');
 
   const fetchProfile = async () => {
     if (!hasToken.value) return;
@@ -39,8 +40,8 @@ const useProfile = (hasToken: Ref<boolean>, updateAccessToken: () => Promise<voi
       profileIsLoading.value = true;
       const accessToken = getAccessToken();
       const headers = new AxiosHeaders();
-      headers.set("Authorization", `Bearer ${accessToken}`);
-      const res = await apiUtils.get<Profile>("users/profile/", { headers });
+      headers.set('Authorization', `Bearer ${accessToken}`);
+      const res = await apiUtils.get<Profile>('users/profile/', { headers });
       profile.value = res.data;
       profileIsLoading.value = false;
     } catch (e) {
@@ -53,12 +54,12 @@ const useProfile = (hasToken: Ref<boolean>, updateAccessToken: () => Promise<voi
   };
   const updateProfile = async (profileData: ProfileFormData) => {
     try {
-      profileUpdateError.value = "";
+      profileUpdateError.value = '';
       profileIsLoading.value = true;
       const accessToken = getAccessToken();
       const headers = new AxiosHeaders();
-      headers.set("Authorization", `Bearer ${accessToken}`);
-      const res = await apiUtils.patch<Profile>("users/profile/", profileData, { headers });
+      headers.set('Authorization', `Bearer ${accessToken}`);
+      const res = await apiUtils.patch<Profile>('users/profile/', profileData, { headers });
       profile.value = res.data;
       profileIsLoading.value = false;
     } catch (e) {
@@ -74,14 +75,14 @@ const useProfile = (hasToken: Ref<boolean>, updateAccessToken: () => Promise<voi
     }
   };
   const changePassword = async (data: ChangePasswordForm) => {
-    passwordUpdateSuccess.value = "";
-    passwordUpdateError.value = "";
+    passwordUpdateSuccess.value = '';
+    passwordUpdateError.value = '';
     try {
       passwordUpdateIsLoading.value = true;
       const headers = new AxiosHeaders();
       const accessToken = getAccessToken();
-      headers.set("Authorization", `Bearer ${accessToken}`);
-      await apiUtils.post("users/password/change/", data, { headers });
+      headers.set('Authorization', `Bearer ${accessToken}`);
+      await apiUtils.post('users/password/change/', data, { headers });
       passwordUpdateIsLoading.value = false;
       passwordUpdateSuccess.value = PASSWORD_CHANGE_SUCCESS;
     } catch (e) {
@@ -97,13 +98,13 @@ const useProfile = (hasToken: Ref<boolean>, updateAccessToken: () => Promise<voi
     }
   };
   const passwordResetSendEmail = async (data: PasswordResetSendEmailData) => {
-    const newData = { ...data, next: window.location.origin + "/password-reset/complete/" };
-    passwordResetSuccess.value = "";
-    passwordResetError.value = "";
+    const newData = { ...data, next: window.location.origin + '/password-reset/complete/' };
+    passwordResetSuccess.value = '';
+    passwordResetError.value = '';
     try {
       passwordResetIsLoading.value = true;
-      const res = await apiUtils.post<PasswordResetSendEmailResponse>("users/password/reset/", newData);
-      passwordResetSuccess.value = res.data.message.split("\n");
+      const res = await apiUtils.post<PasswordResetSendEmailResponse>('users/password/reset/', newData);
+      passwordResetSuccess.value = res.data.message.split('\n');
     } catch (e) {
       if (e instanceof AxiosError) {
         passwordResetError.value = e.response?.data ?? DEFAULT_ERROR_MESSAGE;
@@ -113,7 +114,7 @@ const useProfile = (hasToken: Ref<boolean>, updateAccessToken: () => Promise<voi
     }
   };
   const passwordResetComplete = async (data: PasswordResetCompleteData, token: string) => {
-    passwordResetCompleteError.value = "";
+    passwordResetCompleteError.value = '';
     try {
       passwordResetCompleteIsLoading.value = true;
       const res = await apiUtils.post(`users/password/reset/complete/${token}/`, data);

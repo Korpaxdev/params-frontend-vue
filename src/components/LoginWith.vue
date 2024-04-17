@@ -7,16 +7,16 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { OauthProviders } from "../types/userTypes.ts";
+import { OauthProviders } from '../types/userTypes.ts';
 
 const buildUrl = (provider: OauthProviders) => {
   const baseOauthUrl = `${import.meta.env.VITE_BASE_URL}users/oauth/login/`;
   const searchParams = new URLSearchParams({ next: `${window.location.host}/oauth/` });
   switch (provider) {
-    case "google":
+    case 'google':
       return `${baseOauthUrl}google-oauth2?${searchParams}`;
     default:
-      return "#";
+      return '#';
   }
 };
 </script>

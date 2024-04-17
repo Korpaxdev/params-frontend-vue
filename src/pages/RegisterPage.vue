@@ -3,8 +3,8 @@
   <register-form />
 </template>
 <script lang="ts" setup>
-import RegisterForm from "../components/RegisterForm.vue";
-import useNotAuthPermission from "../hooks/useNotAuthPermission.ts";
+import RegisterForm from '../components/RegisterForm.vue';
+import useNotAuthPermission from '../hooks/useNotAuthPermission.ts';
 
 useNotAuthPermission();
 </script>

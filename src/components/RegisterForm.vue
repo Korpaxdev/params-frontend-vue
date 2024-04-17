@@ -49,14 +49,15 @@
   </Form>
 </template>
 <script lang="ts" setup>
-import { ErrorMessage, Field, Form, FormActions } from "vee-validate";
-import { registerSchema } from "../schemas/userSchemas.ts";
-import { RegisterForm } from "../types/userTypes.ts";
-import useUserStore from "../stores/userStore.ts";
-import { storeToRefs } from "pinia";
-import Alert from "./Alert.vue";
-import Spinner from "./Spinner.vue";
-import { onBeforeUnmount } from "vue";
+import { storeToRefs } from 'pinia';
+import { ErrorMessage, Field, Form, FormActions } from 'vee-validate';
+import { onBeforeUnmount } from 'vue';
+
+import { registerSchema } from '../schemas/userSchemas.ts';
+import useUserStore from '../stores/userStore.ts';
+import { RegisterForm } from '../types/userTypes.ts';
+import Alert from './Alert.vue';
+import Spinner from './Spinner.vue';
 
 const userStore = useUserStore();
 const { register, registerClearStatuses } = userStore;

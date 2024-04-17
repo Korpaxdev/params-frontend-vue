@@ -42,9 +42,10 @@
   </nav>
 </template>
 <script lang="ts" setup>
-import useUserStore from "../stores/userStore.ts";
-import { storeToRefs } from "pinia";
-import useParamsToServerStore from "../stores/paramsToServerStore.ts";
+import { storeToRefs } from 'pinia';
+
+import useParamsToServerStore from '../stores/paramsToServerStore.ts';
+import useUserStore from '../stores/userStore.ts';
 
 const userStore = useUserStore();
 const paramsToServerStore = useParamsToServerStore();

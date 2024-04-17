@@ -3,5 +3,5 @@
   <password-reset-send-email-form />
 </template>
 <script setup lang="ts">
-import PasswordResetSendEmailForm from "../components/PasswordReset/PasswordResetSendEmailForm.vue";
+import PasswordResetSendEmailForm from '../components/PasswordReset/PasswordResetSendEmailForm.vue';
 </script>

@@ -1,10 +1,11 @@
-import { defineStore } from "pinia";
-import useProfile from "./hooks/useProfile.ts";
-import useToken from "./hooks/useToken.ts";
-import { computed, watch } from "vue";
-import useRegister from "./hooks/useRegister.ts";
+import { defineStore } from 'pinia';
+import { computed, watch } from 'vue';
 
-const useUserStore = defineStore("userStore", () => {
+import useProfile from './hooks/useProfile.ts';
+import useRegister from './hooks/useRegister.ts';
+import useToken from './hooks/useToken.ts';
+
+const useUserStore = defineStore('userStore', () => {
   const tokenControls = useToken();
   const { clearTokens, hasToken, updateAccessToken } = tokenControls;
   const profileControls = useProfile(hasToken, updateAccessToken);

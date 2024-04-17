@@ -3,8 +3,8 @@
   <password-change-form />
 </template>
 <script lang="ts" setup>
-import useAuthPermission from "../hooks/useAuthPermission.ts";
-import PasswordChangeForm from "../components/PasswordChangeForm.vue";
+import PasswordChangeForm from '../components/PasswordChangeForm.vue';
+import useAuthPermission from '../hooks/useAuthPermission.ts';
 
 useAuthPermission();
 </script>

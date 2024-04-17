@@ -25,21 +25,20 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
-import { storeToRefs } from "pinia";
+import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
 
-import TableHead from "../TableComponets/TableHead.vue";
-import TableRow from "../TableComponets/TableRow.vue";
-import Paginator from "../Paginator.vue";
-import SearchParams from "./ParametersSearch.vue";
-
-import { Param } from "../../types/paramsTypes.ts";
-import useParamsStore from "../../stores/paramsStore.ts";
-import useUserStore from "../../stores/userStore.ts";
-import useParamsToServerStore from "../../stores/paramsToServerStore.ts";
-import ParametersControls from "./ParametersControls.vue";
-import AddParameterModal from "../AddParameters/AddParameterModal.vue";
-import Spinner from "../Spinner.vue";
+import useParamsStore from '../../stores/paramsStore.ts';
+import useParamsToServerStore from '../../stores/paramsToServerStore.ts';
+import useUserStore from '../../stores/userStore.ts';
+import { Param } from '../../types/paramsTypes.ts';
+import AddParameterModal from '../AddParameters/AddParameterModal.vue';
+import Paginator from '../Paginator.vue';
+import Spinner from '../Spinner.vue';
+import TableHead from '../TableComponets/TableHead.vue';
+import TableRow from '../TableComponets/TableRow.vue';
+import ParametersControls from './ParametersControls.vue';
+import SearchParams from './ParametersSearch.vue';
 
 const paramsStore = useParamsStore();
 const userStore = useUserStore();

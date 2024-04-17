@@ -1,21 +1,22 @@
-import { ref } from "vue";
-import { ErrorMessage } from "../../types/otherTypes.ts";
-import apiUtils from "../../utils/apiUtils.ts";
-import { RegisterForm } from "../../types/userTypes.ts";
-import { DEFAULT_ERROR_MESSAGE, REGISTER_SUCCESS } from "../../utils/messagesConstants.ts";
-import { AxiosError } from "axios";
+import { AxiosError } from 'axios';
+import { ref } from 'vue';
+
+import { ErrorMessage } from '../../types/otherTypes.ts';
+import { RegisterForm } from '../../types/userTypes.ts';
+import apiUtils from '../../utils/apiUtils.ts';
+import { DEFAULT_ERROR_MESSAGE, REGISTER_SUCCESS } from '../../utils/messagesConstants.ts';
 
 const useRegister = () => {
   const isRegisterLoading = ref(false);
-  const registerError = ref<ErrorMessage>("");
-  const registerSuccess = ref("");
+  const registerError = ref<ErrorMessage>('');
+  const registerSuccess = ref('');
 
   const register = async (userData: RegisterForm) => {
-    registerError.value = "";
-    registerSuccess.value = "";
+    registerError.value = '';
+    registerSuccess.value = '';
     try {
       isRegisterLoading.value = true;
-      await apiUtils.post("users/register/", userData);
+      await apiUtils.post('users/register/', userData);
       isRegisterLoading.value = false;
       registerSuccess.value = REGISTER_SUCCESS;
     } catch (e) {
@@ -27,8 +28,8 @@ const useRegister = () => {
   };
   const registerClearStatuses = () => {
     isRegisterLoading.value = false;
-    registerError.value = "";
-    registerSuccess.value = "";
+    registerError.value = '';
+    registerSuccess.value = '';
   };
   return { isRegisterLoading, registerError, registerSuccess, register, registerClearStatuses };
 };

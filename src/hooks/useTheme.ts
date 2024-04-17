@@ -1,7 +1,8 @@
-import { onBeforeMount } from "vue";
-import { getThemeFromLocalStorage, setThemeToLocalStorage } from "../utils/themeUtils.ts";
+import { onBeforeMount } from 'vue';
 
-const BS_ATTR = "data-bs-theme";
+import { getThemeFromLocalStorage, setThemeToLocalStorage } from '../utils/themeUtils.ts';
+
+const BS_ATTR = 'data-bs-theme';
 
 const useTheme = () => {
   onBeforeMount(() => {
@@ -10,10 +11,10 @@ const useTheme = () => {
     if (theme) {
       return document.documentElement.setAttribute(BS_ATTR, theme);
     }
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      theme = "dark";
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      theme = 'dark';
     } else {
-      theme = "light";
+      theme = 'light';
     }
     setThemeToLocalStorage(theme);
     return document.documentElement.setAttribute(BS_ATTR, theme);

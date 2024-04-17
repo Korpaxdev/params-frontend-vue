@@ -42,14 +42,15 @@
 </template>
 
 <script lang="ts" setup>
-import useUserStore from "../stores/userStore.ts";
-import { storeToRefs } from "pinia";
-import { Form, useForm } from "vee-validate";
-import { onBeforeUnmount, ref, watch } from "vue";
-import { Profile, ProfileFormData } from "../types/userTypes.ts";
-import Spinner from "./Spinner.vue";
-import Alert from "./Alert.vue";
-import { profileSchema } from "../schemas/userSchemas.ts";
+import { storeToRefs } from 'pinia';
+import { Form, useForm } from 'vee-validate';
+import { onBeforeUnmount, ref, watch } from 'vue';
+
+import { profileSchema } from '../schemas/userSchemas.ts';
+import useUserStore from '../stores/userStore.ts';
+import { Profile, ProfileFormData } from '../types/userTypes.ts';
+import Alert from './Alert.vue';
+import Spinner from './Spinner.vue';
 
 const userStore = useUserStore();
 const { updateProfile } = userStore;
@@ -58,13 +59,13 @@ const editMode = ref(false);
 
 const form = useForm<Profile>({ validationSchema: profileSchema });
 const { errors } = form;
-const [username, usernameProps] = form.defineField("username");
-const [email, emailProps] = form.defineField("email");
+const [username, usernameProps] = form.defineField('username');
+const [email, emailProps] = form.defineField('email');
 
 const disableEditMode = () => {
   editMode.value = false;
   form.resetForm();
-  profileUpdateError.value = "";
+  profileUpdateError.value = '';
 };
 const onSubmit = form.handleSubmit(async (formData: ProfileFormData) => {
   await updateProfile(formData);

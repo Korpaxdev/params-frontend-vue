@@ -10,10 +10,11 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { ErrorMessage } from "../types/otherTypes.ts";
-import { computed } from "vue";
+import { computed } from 'vue';
 
-type AlertType = "success" | "error";
+import { ErrorMessage } from '../types/otherTypes.ts';
+
+type AlertType = 'success' | 'error';
 
 interface Props {
   message: ErrorMessage;
@@ -24,26 +25,26 @@ const props = defineProps<Props>();
 
 const config = {
   activeClass: {
-    error: "text-danger",
-    success: "text-success",
+    error: 'text-danger',
+    success: 'text-success',
   },
   header: {
-    error: "Упс, произошла ошибка!",
-    success: "Успешно!",
+    error: 'Упс, произошла ошибка!',
+    success: 'Успешно!',
   },
   listGroupClass: {
-    error: "list-group-item-danger-danger",
-    success: "list-group-item-success",
+    error: 'list-group-item-danger-danger',
+    success: 'list-group-item-success',
   },
 };
 const activeClass = computed<string>(() => config.activeClass[props.type]);
 const messageArray = computed<string[]>(() => {
   const array: string[] = [];
-  if (typeof props.message === "string") {
+  if (typeof props.message === 'string') {
     array.push(props.message);
   } else if (Array.isArray(props.message)) {
     for (const val of props.message) {
-      if (typeof val === "object") {
+      if (typeof val === 'object') {
         for (const values of Object.values(val)) {
           array.push(...values);
         }

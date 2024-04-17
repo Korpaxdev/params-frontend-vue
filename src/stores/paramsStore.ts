@@ -1,18 +1,19 @@
-import { defineStore } from "pinia";
-import { computed, reactive, ref } from "vue";
-import { Param, SearchParamFields } from "../types/paramsTypes.ts";
-import apiUtils from "../utils/apiUtils.ts";
-import usePaginator from "./hooks/usePaginator.ts";
-import { DEFAULT_PAGE } from "../utils/defaultConstants.ts";
+import { defineStore } from 'pinia';
+import { computed, reactive, ref } from 'vue';
 
-const useParamsStore = defineStore("params", () => {
+import { Param, SearchParamFields } from '../types/paramsTypes.ts';
+import apiUtils from '../utils/apiUtils.ts';
+import { DEFAULT_PAGE } from '../utils/defaultConstants.ts';
+import usePaginator from './hooks/usePaginator.ts';
+
+const useParamsStore = defineStore('params', () => {
   const params = ref<Param[]>([]);
   const isLoading = ref(false);
   const isError = ref(false);
   const searchFields = reactive<SearchParamFields>({
-    name: "",
-    range: "",
-    scaling: "",
+    name: '',
+    range: '',
+    scaling: '',
   });
   const { paginatedParams, totalPages, currentPage } = usePaginator(params, searchFields);
   const currenPageParams = computed<Param[]>(() => {
@@ -23,7 +24,7 @@ const useParamsStore = defineStore("params", () => {
   const fetchParams = async () => {
     try {
       isLoading.value = true;
-      const res = await apiUtils.get<Param[]>("parameters/");
+      const res = await apiUtils.get<Param[]>('parameters/');
       params.value = res.data;
       isLoading.value = false;
       currentPage.value = DEFAULT_PAGE;

@@ -4,5 +4,5 @@
 </template>
 
 <script setup lang="ts">
-import Parameters from "../components/Paramters/Parameters.vue";
+import Parameters from '../components/Paramters/Parameters.vue';
 </script>

@@ -12,8 +12,9 @@
   </tr>
 </template>
 <script lang="ts" setup>
-import { Param } from "../../types/paramsTypes.ts";
-import { computed } from "vue";
+import { computed } from 'vue';
+
+import { Param } from '../../types/paramsTypes.ts';
 
 interface Props {
   param: Param;
@@ -28,8 +29,8 @@ const isShowToDeleteButton = (index: number) => {
 };
 const renderText = (key: keyof Param, param: Param) => {
   const value = param[key];
-  if (value === null || value === undefined) return "null";
-  if (typeof value === "string" && key === "date") return new Date(value).toString();
+  if (value === null || value === undefined) return 'null';
+  if (typeof value === 'string' && key === 'date') return new Date(value).toString();
   return param[key];
 };
 </script>

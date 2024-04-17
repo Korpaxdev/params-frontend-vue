@@ -1,5 +1,5 @@
-const ACCESS_KEY = "access";
-const REFRESH_KEY = "refresh";
+const ACCESS_KEY = 'access';
+const REFRESH_KEY = 'refresh';
 
 type TokenKey = typeof ACCESS_KEY | typeof REFRESH_KEY;
 

@@ -1,12 +1,13 @@
-import { computed, ref } from "vue";
-import { Param, ParamAddFormData } from "../../types/paramsTypes.ts";
-import usePaginator from "./usePaginator.ts";
-import useParamsStore from "../paramsStore.ts";
-import { storeToRefs } from "pinia";
-import { AxiosError, AxiosHeaders } from "axios";
-import useUserStore from "../userStore.ts";
-import { getAccessToken } from "../../utils/tokenUtils.ts";
-import apiUtils from "../../utils/apiUtils.ts";
+import { AxiosError, AxiosHeaders } from 'axios';
+import { storeToRefs } from 'pinia';
+import { computed, ref } from 'vue';
+
+import { Param, ParamAddFormData } from '../../types/paramsTypes.ts';
+import apiUtils from '../../utils/apiUtils.ts';
+import { getAccessToken } from '../../utils/tokenUtils.ts';
+import useParamsStore from '../paramsStore.ts';
+import useUserStore from '../userStore.ts';
+import usePaginator from './usePaginator.ts';
 
 const useAddNewParams = () => {
   const paramsStore = useParamsStore();
@@ -34,8 +35,8 @@ const useAddNewParams = () => {
     const accessToken = getAccessToken();
     try {
       const headers = new AxiosHeaders();
-      headers.set("Authorization", `Bearer ${accessToken}`);
-      await apiUtils.post("parameters/create/", addedParams.value, { headers });
+      headers.set('Authorization', `Bearer ${accessToken}`);
+      await apiUtils.post('parameters/create/', addedParams.value, { headers });
       addedParams.value = [];
     } catch (e) {
       if (e instanceof AxiosError) {

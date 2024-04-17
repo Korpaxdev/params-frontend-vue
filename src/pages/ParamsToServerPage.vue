@@ -4,12 +4,13 @@
   <params-to-add v-if="addedParams.length" />
 </template>
 <script lang="ts" setup>
-import useAuthPermission from "../hooks/useAuthPermission.ts";
-import useParamsToModifyPermission from "../hooks/useParamsToModifyPermission.ts";
-import ParamsMarkToDelete from "../components/ToServer/ParamsMarkToDelete.vue";
-import useParamsToServerStore from "../stores/paramsToServerStore.ts";
-import { storeToRefs } from "pinia";
-import ParamsToAdd from "../components/ToServer/ParamsToAdd.vue";
+import { storeToRefs } from 'pinia';
+
+import ParamsMarkToDelete from '../components/ToServer/ParamsMarkToDelete.vue';
+import ParamsToAdd from '../components/ToServer/ParamsToAdd.vue';
+import useAuthPermission from '../hooks/useAuthPermission.ts';
+import useParamsToModifyPermission from '../hooks/useParamsToModifyPermission.ts';
+import useParamsToServerStore from '../stores/paramsToServerStore.ts';
 
 useAuthPermission();
 useParamsToModifyPermission();

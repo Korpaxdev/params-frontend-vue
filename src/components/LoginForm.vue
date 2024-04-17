@@ -39,14 +39,15 @@
   <login-with />
 </template>
 <script setup lang="ts">
-import { loginUserSchema } from "../schemas/userSchemas.js";
-import { ErrorMessage, Field, Form, FormActions } from "vee-validate";
-import { LoginData } from "../types/userTypes.ts";
-import useUserStore from "../stores/userStore.ts";
-import { storeToRefs } from "pinia";
-import ErrorAlert from "./Alert.vue";
-import { onBeforeUnmount } from "vue";
-import LoginWith from "./LoginWith.vue";
+import { storeToRefs } from 'pinia';
+import { ErrorMessage, Field, Form, FormActions } from 'vee-validate';
+import { onBeforeUnmount } from 'vue';
+
+import { loginUserSchema } from '../schemas/userSchemas.js';
+import useUserStore from '../stores/userStore.ts';
+import { LoginData } from '../types/userTypes.ts';
+import ErrorAlert from './Alert.vue';
+import LoginWith from './LoginWith.vue';
 
 const userStore = useUserStore();
 const { fetchTokens } = userStore;
@@ -58,6 +59,6 @@ const onSubmit = async (data: LoginData, actions: FormActions<LoginData>) => {
   }
 };
 onBeforeUnmount(() => {
-  tokenError.value = "";
+  tokenError.value = '';
 });
 </script>

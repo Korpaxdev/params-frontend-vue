@@ -23,14 +23,15 @@
   </Form>
 </template>
 <script setup lang="ts">
-import { ErrorMessage, Field, Form, FormActions } from "vee-validate";
-import { passwordResetSendEmailSchema } from "../../schemas/userSchemas.ts";
-import { PasswordResetSendEmailData } from "../../types/userTypes.ts";
-import useUserStore from "../../stores/userStore.ts";
-import Alert from "../Alert.vue";
-import { storeToRefs } from "pinia";
-import Spinner from "../Spinner.vue";
-import { onBeforeUnmount } from "vue";
+import { storeToRefs } from 'pinia';
+import { ErrorMessage, Field, Form, FormActions } from 'vee-validate';
+import { onBeforeUnmount } from 'vue';
+
+import { passwordResetSendEmailSchema } from '../../schemas/userSchemas.ts';
+import useUserStore from '../../stores/userStore.ts';
+import { PasswordResetSendEmailData } from '../../types/userTypes.ts';
+import Alert from '../Alert.vue';
+import Spinner from '../Spinner.vue';
 
 const userStore = useUserStore();
 const { passwordResetSendEmail } = userStore;
@@ -42,7 +43,7 @@ const onSubmit = async (data: PasswordResetSendEmailData, actions: FormActions<P
 };
 
 onBeforeUnmount(() => {
-  passwordResetSuccess.value = "";
-  passwordResetError.value = "";
+  passwordResetSuccess.value = '';
+  passwordResetError.value = '';
 });
 </script>

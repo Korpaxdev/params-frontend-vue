@@ -1,5 +1,6 @@
-import { object, string } from "yup";
-import { ONLY_NUMBERS, REQUIRED_FIELD_ERROR } from "../utils/messagesConstants.ts";
+import { object, string } from 'yup';
+
+import { ONLY_NUMBERS, REQUIRED_FIELD_ERROR } from '../utils/messagesConstants.ts';
 
 export const paramAddSchema = object({
   cat_id: string().required(REQUIRED_FIELD_ERROR),

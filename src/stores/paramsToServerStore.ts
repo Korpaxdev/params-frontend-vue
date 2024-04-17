@@ -1,9 +1,10 @@
-import { defineStore } from "pinia";
-import { computed } from "vue";
-import useMarkToDeleteParams from "./hooks/useMarkToDeleteParams.ts";
-import useAddNewParams from "./hooks/useAddNewParams.ts";
+import { defineStore } from 'pinia';
+import { computed } from 'vue';
 
-const useParamsToServerStore = defineStore("paramsToServerStore", () => {
+import useAddNewParams from './hooks/useAddNewParams.ts';
+import useMarkToDeleteParams from './hooks/useMarkToDeleteParams.ts';
+
+const useParamsToServerStore = defineStore('paramsToServerStore', () => {
   const markToDeleteParamsControls = useMarkToDeleteParams();
   const addNewParamsControls = useAddNewParams();
   const { paramsMarkToDelete, markParamsSyncIsLoading, markParamsSyncError, syncMarkedParams } =
@@ -14,7 +15,7 @@ const useParamsToServerStore = defineStore("paramsToServerStore", () => {
   const hasParamsToModify = computed(() => !!countParamsToModify.value);
 
   const clearModifyParams = () => {
-    markParamsSyncError.value = "";
+    markParamsSyncError.value = '';
     paramsMarkToDelete.value = [];
     addedParams.value = [];
   };

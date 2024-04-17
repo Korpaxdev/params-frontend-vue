@@ -17,15 +17,16 @@
   </div>
 </template>
 <script lang="ts" setup>
-import useParamsStore from "../../stores/paramsStore.ts";
-import { storeToRefs } from "pinia";
-import { SearchParamFields } from "../../types/paramsTypes.ts";
-import { debounce } from "../../utils/otherUtils.ts";
+import { storeToRefs } from 'pinia';
+
+import useParamsStore from '../../stores/paramsStore.ts';
+import { SearchParamFields } from '../../types/paramsTypes.ts';
+import { debounce } from '../../utils/otherUtils.ts';
 
 const labels: SearchParamFields = {
-  name: "Название параметра",
-  range: "Range",
-  scaling: "Scaling",
+  name: 'Название параметра',
+  range: 'Range',
+  scaling: 'Scaling',
 };
 
 const store = useParamsStore();
@@ -42,7 +43,7 @@ const onInput = (value: string, key: keyof SearchParamFields) => {
 };
 const clearFields = () => {
   for (let key in searchFields.value) {
-    searchFields.value[key as keyof SearchParamFields] = "";
+    searchFields.value[key as keyof SearchParamFields] = '';
   }
 };
 </script>

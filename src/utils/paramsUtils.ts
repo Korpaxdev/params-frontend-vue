@@ -1,5 +1,5 @@
-import { FoundBy, Param, SearchParamFields } from "../types/paramsTypes.ts";
-import { DEFAULT_PARAMS_PER_PAGE } from "./defaultConstants.ts";
+import { FoundBy, Param, SearchParamFields } from '../types/paramsTypes.ts';
+import { DEFAULT_PARAMS_PER_PAGE } from './defaultConstants.ts';
 
 export const createPaginatedParams = (params: Param[]) => {
   const paginatedParams = [];

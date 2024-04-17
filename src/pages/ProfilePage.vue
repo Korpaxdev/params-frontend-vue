@@ -4,11 +4,12 @@
   <spinner v-else class="fixed-center" />
 </template>
 <script lang="ts" setup>
-import useUserStore from "../stores/userStore.ts";
-import { storeToRefs } from "pinia";
-import ProfileForm from "../components/ProfileForm.vue";
-import Spinner from "../components/Spinner.vue";
-import useAuthPermission from "../hooks/useAuthPermission.ts";
+import { storeToRefs } from 'pinia';
+
+import ProfileForm from '../components/ProfileForm.vue';
+import Spinner from '../components/Spinner.vue';
+import useAuthPermission from '../hooks/useAuthPermission.ts';
+import useUserStore from '../stores/userStore.ts';
 
 useAuthPermission();
 

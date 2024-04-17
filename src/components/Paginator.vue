@@ -28,8 +28,9 @@
   </nav>
 </template>
 <script lang="ts" setup>
-import { computed } from "vue";
-import { DEFAULT_PAGE } from "../utils/defaultConstants.ts";
+import { computed } from 'vue';
+
+import { DEFAULT_PAGE } from '../utils/defaultConstants.ts';
 
 interface Props {
   currentPage: number;

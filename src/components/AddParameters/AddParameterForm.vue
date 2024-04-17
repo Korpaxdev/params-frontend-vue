@@ -11,13 +11,14 @@
   </Form>
 </template>
 <script lang="ts" setup>
-import { ErrorMessage, Field, Form, FormActions } from "vee-validate";
-import { paramAddSchema } from "../../schemas/paramSchemas.ts";
-import { ParamAddFormData } from "../../types/paramsTypes.ts";
-import useParamsToServerStore from "../../stores/paramsToServerStore.ts";
-import useParamsStore from "../../stores/paramsStore.ts";
-import { storeToRefs } from "pinia";
-import { DEFAULT_PAGE } from "../../utils/defaultConstants.ts";
+import { storeToRefs } from 'pinia';
+import { ErrorMessage, Field, Form, FormActions } from 'vee-validate';
+
+import { paramAddSchema } from '../../schemas/paramSchemas.ts';
+import useParamsStore from '../../stores/paramsStore.ts';
+import useParamsToServerStore from '../../stores/paramsToServerStore.ts';
+import { ParamAddFormData } from '../../types/paramsTypes.ts';
+import { DEFAULT_PAGE } from '../../utils/defaultConstants.ts';
 
 interface Props {
   closeModalFunc: () => void;

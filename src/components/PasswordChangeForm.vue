@@ -48,13 +48,14 @@
   </Form>
 </template>
 <script lang="ts" setup>
-import { ErrorMessage, Field, Form, FormActions } from "vee-validate";
-import { passwordChangeSchema } from "../schemas/userSchemas.ts";
-import { ChangePasswordForm } from "../types/userTypes.ts";
-import useUserStore from "../stores/userStore.ts";
-import { storeToRefs } from "pinia";
-import Alert from "./Alert.vue";
-import Spinner from "./Spinner.vue";
+import { storeToRefs } from 'pinia';
+import { ErrorMessage, Field, Form, FormActions } from 'vee-validate';
+
+import { passwordChangeSchema } from '../schemas/userSchemas.ts';
+import useUserStore from '../stores/userStore.ts';
+import { ChangePasswordForm } from '../types/userTypes.ts';
+import Alert from './Alert.vue';
+import Spinner from './Spinner.vue';
 
 const userStore = useUserStore();
 const { changePassword } = userStore;

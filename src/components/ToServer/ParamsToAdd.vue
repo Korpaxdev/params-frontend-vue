@@ -17,12 +17,13 @@
   <paginator :change-page="changePage" :total-pages="addedParamsTotalPage" :current-page="addedParamsCurrentPage" />
 </template>
 <script lang="ts" setup>
-import TableRow from "../TableComponets/TableRow.vue";
-import TableHead from "../TableComponets/TableHead.vue";
-import Paginator from "../Paginator.vue";
-import useParamsToServerStore from "../../stores/paramsToServerStore.ts";
-import { storeToRefs } from "pinia";
-import { computed } from "vue";
+import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
+
+import useParamsToServerStore from '../../stores/paramsToServerStore.ts';
+import Paginator from '../Paginator.vue';
+import TableHead from '../TableComponets/TableHead.vue';
+import TableRow from '../TableComponets/TableRow.vue';
 
 const paramsToServerStore = useParamsToServerStore();
 const { removeAddedParamFromList } = paramsToServerStore;

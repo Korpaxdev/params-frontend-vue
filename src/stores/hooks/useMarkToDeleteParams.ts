@@ -1,13 +1,14 @@
-import { computed, ref } from "vue";
-import { Param } from "../../types/paramsTypes.ts";
-import usePaginator from "./usePaginator.ts";
-import apiUtils from "../../utils/apiUtils.ts";
-import { getAccessToken } from "../../utils/tokenUtils.ts";
-import { AxiosError, AxiosHeaders } from "axios";
-import useUserStore from "../userStore.ts";
-import { ErrorMessage } from "../../types/otherTypes.ts";
-import { DEFAULT_ERROR_MESSAGE } from "../../utils/messagesConstants.ts";
-import { storeToRefs } from "pinia";
+import { AxiosError, AxiosHeaders } from 'axios';
+import { storeToRefs } from 'pinia';
+import { computed, ref } from 'vue';
+
+import { ErrorMessage } from '../../types/otherTypes.ts';
+import { Param } from '../../types/paramsTypes.ts';
+import apiUtils from '../../utils/apiUtils.ts';
+import { DEFAULT_ERROR_MESSAGE } from '../../utils/messagesConstants.ts';
+import { getAccessToken } from '../../utils/tokenUtils.ts';
+import useUserStore from '../userStore.ts';
+import usePaginator from './usePaginator.ts';
 
 const useMarkToDeleteParams = () => {
   const paramsMarkToDelete = ref<Param[]>([]);
@@ -23,7 +24,7 @@ const useMarkToDeleteParams = () => {
     return paginatedMarkToDeleteParams.value![markToDeleteCurrentPage.value - 1];
   });
   const markParamsSyncIsLoading = ref(false);
-  const markParamsSyncError = ref<ErrorMessage>("");
+  const markParamsSyncError = ref<ErrorMessage>('');
   const markParamToDelete = (param: Param) => {
     paramsMarkToDelete.value.push(param);
   };
@@ -37,8 +38,8 @@ const useMarkToDeleteParams = () => {
     try {
       markParamsSyncIsLoading.value = true;
       const headers = new AxiosHeaders();
-      headers.set("Authorization", `Bearer ${accessToken}`);
-      await apiUtils.post("parameters/to-delete/", paramsMarkToDelete.value, { headers });
+      headers.set('Authorization', `Bearer ${accessToken}`);
+      await apiUtils.post('parameters/to-delete/', paramsMarkToDelete.value, { headers });
       paramsMarkToDelete.value = [];
     } catch (e) {
       if (e instanceof AxiosError) {

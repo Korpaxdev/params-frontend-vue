@@ -1,7 +1,8 @@
-import useParamsToServerStore from "../stores/paramsToServerStore.ts";
-import { storeToRefs } from "pinia";
-import { watch } from "vue";
-import router from "../routes/router.ts";
+import { storeToRefs } from 'pinia';
+import { watch } from 'vue';
+
+import router from '../routes/router.ts';
+import useParamsToServerStore from '../stores/paramsToServerStore.ts';
 
 const useParamsToModifyPermission = () => {
   const paramsToServerStore = useParamsToServerStore();
@@ -9,7 +10,7 @@ const useParamsToModifyPermission = () => {
 
   const redirectCallback = async () => {
     if (!hasParamsToModify.value) {
-      await router.replace({ name: "IndexPage", replace: true });
+      await router.replace({ name: 'IndexPage', replace: true });
     }
   };
 

@@ -22,8 +22,9 @@
   </teleport>
 </template>
 <script setup lang="ts">
-import AddParameterForm from "./AddParameterForm.vue";
-import { ref } from "vue";
+import { ref } from 'vue';
+
+import AddParameterForm from './AddParameterForm.vue';
 
 const closeButton = ref<HTMLButtonElement | null>(null);
 const closeModal = () => {

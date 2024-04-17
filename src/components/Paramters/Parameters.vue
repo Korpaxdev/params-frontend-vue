@@ -4,12 +4,13 @@
 </template>
 
 <script lang="ts" setup>
-import useParamsStore from "../../stores/paramsStore.ts";
-import { onMounted } from "vue";
-import { storeToRefs } from "pinia";
-import { DEFAULT_ERROR_MESSAGE } from "../../utils/messagesConstants.ts";
-import Alert from "../Alert.vue";
-import ParametersTable from "./ParametersTable.vue";
+import { storeToRefs } from 'pinia';
+import { onMounted } from 'vue';
+
+import useParamsStore from '../../stores/paramsStore.ts';
+import { DEFAULT_ERROR_MESSAGE } from '../../utils/messagesConstants.ts';
+import Alert from '../Alert.vue';
+import ParametersTable from './ParametersTable.vue';
 
 const store = useParamsStore();
 const { fetchParams } = store;

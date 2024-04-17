@@ -3,5 +3,5 @@
   <password-reset-complete-form />
 </template>
 <script setup lang="ts">
-import PasswordResetCompleteForm from "../components/PasswordReset/PasswordResetCompleteForm.vue";
+import PasswordResetCompleteForm from '../components/PasswordReset/PasswordResetCompleteForm.vue';
 </script>

@@ -1,7 +1,8 @@
-import { Param, SearchParamFields } from "../../types/paramsTypes.ts";
-import { computed, ref, Ref, watch } from "vue";
-import { createFilteredParams, createPaginatedParams } from "../../utils/paramsUtils.ts";
-import { DEFAULT_PAGE } from "../../utils/defaultConstants.ts";
+import { Ref, computed, ref, watch } from 'vue';
+
+import { Param, SearchParamFields } from '../../types/paramsTypes.ts';
+import { DEFAULT_PAGE } from '../../utils/defaultConstants.ts';
+import { createFilteredParams, createPaginatedParams } from '../../utils/paramsUtils.ts';
 
 const usePaginator = (params: Ref<Param[] | null>, searchFields?: SearchParamFields) => {
   const currentPage = ref(DEFAULT_PAGE);

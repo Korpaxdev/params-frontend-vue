@@ -8,9 +8,9 @@
 </template>
 
 <script setup lang="ts">
-import Navbar from "./components/Navbar.vue";
-import useTheme from "./hooks/useTheme.ts";
-import useAuth from "./hooks/useAuth.ts";
+import Navbar from './components/Navbar.vue';
+import useAuth from './hooks/useAuth.ts';
+import useTheme from './hooks/useTheme.ts';
 
 useTheme();
 useAuth();
