@@ -2,6 +2,7 @@ import { RouteRecordRaw } from 'vue-router';
 
 import IndexPage from '../pages/IndexPage.vue';
 import LoginPage from '../pages/LoginPage.vue';
+import NotFoundPage from '../pages/NotFoundPage.vue';
 import OauthPage from '../pages/OauthPage.vue';
 import ParamsToServerPage from '../pages/ParamsToServerPage.vue';
 import PasswordChangePage from '../pages/PasswordChangePage.vue';
@@ -31,6 +32,11 @@ const routes: ReadonlyArray<RouteRecordRaw> = [
     beforeEnter(to) {
       return JWT_REGEXP.test(to.query.access as string) && JWT_REGEXP.test(to.query.refresh as string);
     },
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: NotFoundPage,
+    name: 'NotFoundPage',
   },
 ];
 export default routes;

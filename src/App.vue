@@ -1,7 +1,7 @@
 <template>
   <navbar />
   <main>
-    <div class="container mt-5">
+    <div class="container mt-5 position-relative">
       <router-view />
     </div>
   </main>

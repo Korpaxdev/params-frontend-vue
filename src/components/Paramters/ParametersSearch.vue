@@ -8,7 +8,7 @@
         :name="key"
         class="form-control"
         :value="value"
-        @input="onInput(($event.target as HTMLInputElement).value, key)"
+        @input="onInput(($event.target as HTMLInputElement).value.trim(), key)"
       />
     </div>
     <div class="d-flex justify-content-end">

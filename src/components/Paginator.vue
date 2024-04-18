@@ -30,7 +30,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue';
 
-import { DEFAULT_PAGE } from '../utils/defaultConstants.ts';
+import { DEFAULT_PAGE, DEFAULT_PAGINATION_COUNT } from '../utils/defaultConstants.ts';
 
 interface Props {
   currentPage: number;
@@ -43,8 +43,8 @@ const props = defineProps<Props>();
 const pageList = computed(() => Array.from({ length: props.totalPages }).map((_, i) => i + 1));
 const pageListPaginator = computed(() => {
   const pages = [];
-  for (let i = 0; i < pageList.value.length; i += 3) {
-    pages.push(pageList.value.slice(i, i + 3));
+  for (let i = 0; i < pageList.value.length; i += DEFAULT_PAGINATION_COUNT) {
+    pages.push(pageList.value.slice(i, i + DEFAULT_PAGINATION_COUNT));
   }
   return pages;
 });
